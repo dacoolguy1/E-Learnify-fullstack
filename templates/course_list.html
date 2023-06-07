@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="v14_263">
+        <div class="v14_265"><a href="/coursehome" class="v14_266" >/E- Learnify</a></div>
+        <div class="v14_267">
+            <a class="v14_268" href="/dashboard">Courses</a>
+            <a href="/about" class="v14_269" >About</a>
+            <span class="v14_270">Contact</span>
+            <div class="v14_274">
+                <span class="v14_275">Home</span>
+                <div class="name"></div>
+            </div>
+        </div>
+        <span class="v17_374">Be an Einsteineth!</span>
+        <div class="v17_403">
+            <div class="v17_402">
+                <div class="v17_392"></div>
+                <span class="v17_401">Search for your preferred course</span>
+            </div>
+        </div>
+        <div class="v54_135">
+            <span class="v54_134">Search</span>
+        </div>
+        <div class="v52_86"></div>
+        <div class="v93_61">
+            <div class="course-container">
+              {% for course in courses %}
+              <div class="course-item">
+                <div class="course-image">
+                  <img src="{{ course.image }}" alt="Course Image">
+                </div>
+                <div class="course-details">
+                  <span class="course-title"><a href="/coursepage/{{ course.id }}">{{ course.title }}</a></span>
+                  <span class="course-description">{{ course.description }}</span>
+                  <p class="course-instructor">Instructor: {{ course.instructor }}</p>
+                  <p class="course-duration">Duration: {{ course.duration }}</p>
+                  {% if course.is_enrolled %}
+                      <p class="course-status">Enrolled</p>
+                      <form action="/unenroll/{{ course.enrollment_id }}" method="post">
+                          <button type="submit" class="enroll-button">Unenroll</button>
+                      </form>
+                  {% else %}
+                      <p class="course-status">Not Enrolled</p>
+                      <form action="/enroll/{{ course.id }}" method="post">
+                          <input type="hidden" name="course_id" value="{{ course.id }}">
+                          <button type="submit" class="enroll-button">Enroll</button>
+                      </form>
+                      
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+        <!-- <div class="v93_61">
+            {% for course in courses %}
+            <div class="course-container">
+              <div class="course-image">
+                <img src="{{course.image}}" alt="Course Image">
+              </div>
+              <div class="course-details">
+                <span class="course-title">{{ course.title }}</span>
+                <span class="course-description">{{ course.description }}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div> -->
+          
+    </div>
+</body>
+</html>
+
+<!-- <div class="course-list">
+    {% for course in courses %}
+        <div class="course-item">
+            <h2 class="course-title">{{ course.title }}</h2>
+            <p class="course-description">{{ course.description }}</p>
+            <p class="course-instructor">Instructor: {{ course.instructor }}</p>
+            <p class="course-duration">Duration: {{ course.duration }}</p>
+            {% if course.is_enrolled %}
+                <p class="course-status">Enrolled</p>
+                <form action="/unenroll/{{ course.enrollment_id }}" method="post">
+                    <button type="submit" class="enroll-button">Unenroll</button>
+                </form>
+            {% else %}
+                <p class="course-status">Not Enrolled</p>
+                <form action="/enroll/{{ course.id }}" method="post">
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <button type="submit" class="enroll-button">Enroll</button>
+                </form>
+                
+            {% endif %}
+        </div>
+    {% endfor %}
+</div> -->

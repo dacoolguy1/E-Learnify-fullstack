@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="v14_263">
+        <div class="v14_265"> <a href="/coursehome" class="v14_266" >/E- Learnify</a></div>
+        <div class="v14_267">
+            <a class="v14_268" href="/dashboard">Courses</a>
+            <a href="/about" class="v14_269" >About</a>
+            <span class="v14_270">Contact</span>
+            <div class="v14_274">
+                <span class="v14_275">Home</span>
+                <div class="name"></div>
+            </div>
+        </div>
+        <span class="v17_374">Be an Einsteineth!</span>
+        <div class="v17_403">
+            <div class="v17_402">
+                <div class="v17_392"></div>
+                <span class="v17_401">Search for your preferred course</span>
+            </div>
+        </div>
+        <div class="v54_135">
+            <span class="v54_134">Search</span>
+        </div>
+        <div class="v52_86"></div>
+
+
+        <div class="v93_61">
+            <div class="course-main">
+                <img src="{{ course.image }}" alt="Course Image" class="mage">
+                <h2 class="course-title">{{ course.title }}</h2>
+                <p class="course-instructor">Instructor: {{ course.instructor }}</p>
+                <p class="course-duration">Duration: {{ course.duration }} weeks</p>
+            </div>
+            <div id="progress" class="course-progress">
+                Progress: <span id="progress-value">{{ course.progress_percent }}%</span>
+            </div>
+
+
+            {% for module in modules %}
+            <div class="module">
+                <button class="module-button">Module {{ module.id }}</button>
+                <div class="module-details">
+                    <a href="{{ module.link }}">External Site {{ module.id }}</a>
+                    <p>{{ module.title }}</p>
+                    <p>{{ module.description }}</p>
+                    <form action="/mark_module_done" method="POST">
+                        <input type="hidden" name="module_id" value="{{ module.id }}">
+                        <input type="hidden" name="course_id" value="{{ course.id }}">
+
+                        <button type="submit">Mark as Done</button>
+                    </form>
+
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- <script>
+            // Get all module buttons
+            const moduleButtons = document.querySelectorAll('.module-button');
+
+            // Add click event listener to each module button
+            moduleButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    // Toggle the display of module details
+                    const details = this.nextElementSibling;
+                    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+
+            // Add click event listener to done buttons
+            const doneButtons = document.querySelectorAll('.done-button');
+
+            doneButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const moduleId = this.dataset.moduleId;
+                    markModuleAsDone(moduleId);
+                });
+            });
+
+            function markModuleAsDone(moduleId) {
+                // Send an AJAX request to the server to mark the module as done
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/mark_module_done');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            // Update the UI to reflect the module as done
+                            const moduleButton = document.querySelector(`.module-button[data-module-id="${moduleId}"]`);
+                            moduleButton.classList.add('done');
+                        } else {
+                            console.error(response.error);
+                        }
+                    } else {
+                        console.error('Request failed');
+                    }
+                };
+                xhr.send(JSON.stringify({ moduleId: moduleId }));
+            }
+        </script> -->
+
+            <script>
+                // Get all module buttons
+                const moduleButtons = document.querySelectorAll('.module-button');
+
+                // Add click event listener to each module button
+                moduleButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // Toggle the display of module details
+                        const details = this.nextElementSibling;
+                        details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                    });
+                });
+
+                // Add click event listener to done buttons
+                const doneButtons = document.querySelectorAll('.done-button');
+
+                doneButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        const moduleId = this.dataset.moduleId;
+                        markModuleAsDone(moduleId);
+                    });
+                });
+                const progressValue = document.getElementById('progress-value');
+                progressValue.innerText = '{{ course.progress_percent }}';
+
+                console.log(progressValue.innerText);
+
+                function markModuleAsDone(moduleId) {
+                    // Send an AJAX request to the server to mark the module as done
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/mark_module_done');
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            const response = JSON.parse(xhr.responseText);
+                            if (response.success) {
+                                // Update the UI to reflect the module as done
+                                const moduleButton = document.querySelector(`.module-button[data-module-id="${moduleId}"]`);
+                                moduleButton.classList.add('done');
+
+                                // Update the progress value
+                                const progress = document.getElementById('progress-value');
+                                const doneModules = document.querySelectorAll('.done-button');
+                                const totalModules = document.querySelectorAll('.module-button').length;
+                                const progressValue = Math.round((doneModules.length / totalModules) * 100);
+                                progress.innerText = progressValue + '%';
+                            } else {
+                                console.error(response.error);
+                            }
+                        } else {
+                            console.error('Request failed');
+                        }
+                    };
+                    xhr.send(JSON.stringify({ moduleId: moduleId }));
+                }
+            </script>
+</body>
+
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="v14_263">
+        <div class="v14_265"><span class="v14_266">/E- Learnify</span></div>
+        <div class="v14_267">
+            <a class="v14_268" href="/dashboard">Courses</a>
+            <span class="v14_269">About</span>
+            <span class="v14_270">Contact</span>
+            <div class="v14_274">
+                <span class="v14_275">Home</span>
+                <div class="name"></div>
+            </div>
+        </div>
+        <span class="v17_374">Be an Einsteineth!</span>
+        <div class="v17_403">
+            <div class="v17_402">
+                <div class="v17_392"></div>
+                <span class="v17_401">Search for your preferred course</span>
+            </div>
+        </div>
+        <div class="v54_135">
+            <span class="v54_134">Search</span>
+        </div>
+        <div class="v52_86"></div>
+        <div class="v93_61">
+            <div class="course-main">
+
+                <img src="{{ course.image }}" alt="Course Image" class="mage">
+
+
+                <h2 class="course-title">{{ course.title }}</h2>
+                <p class="course-instructor">Instructor: {{ course.instructor }}</p>
+                <p class="course-duration">Duration: {{ course.duration }}</p>
+
+            </div>
+            <div class="module">
+                
+                <button class="module-button">Module 1</button>
+                <div class="module-details">
+                    <a href="external-site-1">External Site 1</a>
+                    <p>Module 1 Details</p>
+                    <button class="done-button">Done</button>
+                </div>
+            </div>
+
+            <div class="module">
+                <button class="module-button">Module 2</button>
+                <div class="module-details">
+                    <a href="external-site-2">External Site 2</a>
+                    <p>Module 2 Details</p>
+                    <button class="done-button">Done</button>
+                </div>
+            </div>
+
+            <!-- <div class="course-container">
+              {% for course in courses %}
+              <div class="course-item">
+                <div class="course-image">
+                  <img src="{{ course.image }}" alt="Course Image">
+                </div>
+                <div class="course-details">
+                  <!-- <span class="course-title"><a href="">{{ course.title }}</a></span>
+                  <span class="course-description">{{ course.description }}</span> -->
+<!-- </div>
+              </div> --> -->
+<!-- {% endfor %} -->
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- <div class="v93_61">
+            {% for course in courses %}
+            <div class="course-container">
+              <div class="course-image">
+                <img src="{{course.image}}" alt="Course Image">
+              </div>
+              <div class="course-details">
+                <span class="course-title">{{ course.title }}</span>
+                <span class="course-description">{{ course.description }}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div> -->
+<!-- 
+    </div>
+    <script>
+        // Get all module buttons
+        const moduleButtons = document.querySelectorAll('.module-button');
+
+        // Add click event listener to each module button
+        moduleButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                // Toggle the display of module details
+                const details = this.nextElementSibling;
+                details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+    </script>
+</body>
+
+</html> --> -->

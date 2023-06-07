@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
+    <title>Login</title>
+</head>
+
+<body class="ddd">
+    <div id="signin-modal" class="modal">
+        <div class="modal-content">
+            <form method="POST" action="/login">
+                <!-- <h2>Login</h2> -->
+                <div class="v12_62">                
+                    <div class="v9_570"></div>
+                    <div class="v14_147">
+                        <div class="v9_571"></div>
+                        <div class="v9_617">
+                            <div class="v9_618"></div>
+                            <div class="v9_619"></div><span class="v9_620">or</span>
+                        </div>
+                        <div class="v9_621">
+                            <div class="v9_622"></div><span class="v9_623">Sign in with Google</span>
+                            <div class="v90_80">
+                                <div class="v9_624">
+                                    <div class="v9_625"></div>
+                                    <div class="v9_626"></div>
+                                    <div class="v9_627"></div>
+                                    <div class="v9_628"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="v9_629">
+                            <div class="v9_630"></div><span class="v9_631">Sign in with Facebook</span>
+                            <div class="v90_81">
+                                <div class="v9_632">
+                                    <div class="v9_633"></div>
+                                </div>
+                            </div>
+                        </div><span class="v9_572">Welcome back!</span>
+                        <div class="v9_613">
+                            <div class="v9_614"></div><button class="v9_614" type="submit">Login</button>
+                        </div><span class="v9_616">Forget password?</span>
+                        
+                        <a class="v9_634" href="/signup">New to E -
+                            learnify?     Sign
+                            up</a>
+
+                        <!-- <label class="email" for="email">Emails</label> -->
+                        <input class="v85_97" type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+                        <!-- <label class="v85_98" for="password">Password:</label> -->
+                        <input class="v85_98" type="password" id="password" name="password" placeholder="Enter your password" required>
+
+
+
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>           
+     <!-- <div class="v85_94"></div> -->
+            <!-- <div class="v85_99"></div> -->
+            <a href="/" id="close" class="v90_73">x</a>
+
+
+
+    </form>
+
+    <!-- <h2>Login</h2>
+    <form method="POST" action="/login">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <p>Don't have an account? <a href="/signup">Sign Up</a></p> -->
+    
+</body>
+
+</html>

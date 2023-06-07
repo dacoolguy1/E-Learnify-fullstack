@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+    <link href="./css/main.css" rel="stylesheet" />
+    <title>{{ course.title }} - Course Details</title>
+</head>
+<body>
+    <div class="v1_45">
+        <!-- Navbar content goes here -->
+    </div>
+    <div class="v1_59">
+        <!-- Page header content goes here -->
+    </div>
+    <div class="course-details">
+        <h2 class="course-title">{{ course.title }}</h2>
+        <p class="course-description">{{ course.description }}</p>
+        <p class="course-instructor">Instructor: {{ course.instructor }}</p>
+        <p class="course-duration">Duration: {{ course.duration }}</p>
+        <form action="/enroll/{{ course_id }}" method="post">
+            <button type="submit" class="enroll-button">Enroll</button>
+        </form>
+    </div>
+    <div class="v1_99">
+        <!-- Footer content goes here -->
+    </div>
+</body>
+</html>

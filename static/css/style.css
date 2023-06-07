@@ -1,0 +1,29 @@
+.navbar {
+    background-color: darkblue;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo {
+    margin-right: auto;
+    padding-right: 20px;
+    border-right: 1px solid white;
+}
+
+.logo-text {
+    font-size: 20px;
+}
+
+.nav-links a {
+    margin-right: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.auth-links a {
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+}
